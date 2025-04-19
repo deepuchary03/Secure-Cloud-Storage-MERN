@@ -83,6 +83,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
       // Admin section header - not a link
       label: "Admin",
       isHeader: true,
+      href: "",
       roles: ["admin"]
     },
     {
@@ -164,16 +165,16 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
             
             // Regular navigation item
             return (
-              <Link key={index} href={item.href}>
-                <a
-                  className={cn(
-                    "flex items-center px-3 py-2 rounded-md text-neutral-600 hover:bg-neutral-100 transition-colors",
-                    location === item.href && "bg-primary-50 text-primary-700 font-medium"
-                  )}
-                >
-                  {item.icon}
-                  {item.label}
-                </a>
+              <Link 
+                key={index} 
+                href={item.href || "/"}
+                className={cn(
+                  "flex items-center px-3 py-2 rounded-md text-neutral-600 hover:bg-neutral-100 transition-colors",
+                  location === item.href && "bg-primary-50 text-primary-700 font-medium"
+                )}
+              >
+                {item.icon}
+                {item.label}
               </Link>
             );
           })}
@@ -231,6 +232,9 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                 {location === "/shared" && "Shared with me"}
                 {location === "/users" && "User Management"}
                 {location === "/access-control" && "Access Control"}
+                {location === "/cloud" && "Cloud Storage"}
+                {location === "/recent" && "Recent Files"}
+                {location === "/logs" && "Activity Logs"}
               </h2>
             </div>
 

@@ -23,6 +23,14 @@ function Router() {
       <ProtectedRoute path="/shared" component={SharedFiles} />
       <ProtectedRoute path="/users" component={UserManagement} />
       <ProtectedRoute path="/access-control" component={AccessControl} />
+      
+      {/* Redirect Recent and Cloud Storage to My Files for now */}
+      <ProtectedRoute path="/recent" component={MyFiles} />
+      <ProtectedRoute path="/cloud" component={MyFiles} />
+      
+      {/* Redirect Activity Logs to Dashboard for now */}
+      <ProtectedRoute path="/logs" component={Dashboard} />
+      
       {/* Fallback to 404 */}
       <Route component={NotFound} />
     </Switch>
