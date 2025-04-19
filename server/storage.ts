@@ -114,7 +114,13 @@ export class MongoDBStorage implements IStorage {
 
   constructor() {
     const uri = process.env.MONGODB_URI || 'mongodb://localhost:27017/securecloud';
-    this.client = new MongoClient(uri);
+    this.client = new MongoClient(uri, {
+      // Add SSL connection options
+      ssl: true,
+      tlsAllowInvalidCertificates: true, // For development only
+      tlsAllowInvalidHostnames: true, // For development only
+      retryWrites: true
+    });
     this.sessionStore = new MemoryStore({
       checkPeriod: 86400000 // prune expired entries every 24h
     });
@@ -883,6 +889,5 @@ export class MemStorage implements IStorage {
 }
 
 // Decide which storage to use based on environment
-export const storage = process.env.MONGODB_URI 
-  ? new MongoDBStorage() 
-  : new MemStorage();
+// Temporarily using memory storage until MongoDB connection issues are resolved
+export const storage = new MemStorage();
